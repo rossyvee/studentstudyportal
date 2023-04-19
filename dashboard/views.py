@@ -234,7 +234,7 @@ def wiki(request):
         context = {
             'form':form,
             'title':search.title,
-            'link':search.link,
+            'link':search.url,
             'details':search.summary
 
         }
