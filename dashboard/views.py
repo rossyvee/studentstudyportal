@@ -227,7 +227,7 @@ def dictionary(request):
 
 
 def wiki(request):
-    if request.medthod == 'POST':
+    if request.method == 'POST':
         text = request.POST['text']
         form = DashboardForm(request.POST)
         search = wikipedia.page(text)
