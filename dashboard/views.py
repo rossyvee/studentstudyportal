@@ -227,6 +227,17 @@ def dictionary(request):
 
 
 def wiki(request):
+    if request.medthod == 'POST':
+        text = request.POST['text']
+        form = DashboardForm(request.POST)
+        search = wikipedia.page(text)
+        context = {
+            'form':form,
+            'title':search.title,
+            'link':search.link,
+            'details':search.summary
+
+        }
     form = DashboardForm()
     context = {'form':form}
     return render(request,"dashboard/wiki.html",context)
