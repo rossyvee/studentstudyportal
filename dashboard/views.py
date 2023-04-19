@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.views import generic
 from youtubesearchpython import VideosSearch
 import requests
+import wikipedia
 
 # Create your views here.
 def home(request):
