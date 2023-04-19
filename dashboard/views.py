@@ -238,6 +238,8 @@ def wiki(request):
             'details':search.summary
 
         }
-    form = DashboardForm()
-    context = {'form':form}
+        return render(request, "dashboard/wiki.html",context)
+    else:
+     form = DashboardForm()
+     context = {'form':form}
     return render(request,"dashboard/wiki.html",context)
