@@ -123,18 +123,18 @@ def todo(request):
                     finished = False
             except:
                     finished= False
-                    todos =Todo(
+                    todos = Todo(
                         user = request.user,
-                        title =request.POST['title'],
+                        title = request.POST['title'],
                         is_finished = finished
                     )
                     todos.save()
                     messages.success(request,f"Todo Added from {request.user.username}")
     else:
-          form = TodoForm()
+        form = TodoForm()
     todo = Todo.objects.filter(user=request.user)
     if len(todo) == 0:
-        todo_done = True
+        todos_done = True
     else:
         todos_done = False
 
@@ -143,7 +143,9 @@ def todo(request):
         'todos':todo,
         'todos_done':todos_done
     }
-    return render(request,'dashboard/todo.html', context)
+    return render(request,"dashboard/todo.html", context)
+
+
 
 
 def update_todo(request,pk=None):
@@ -325,4 +327,21 @@ def register(request):
     return render(request,"dashboard/register.html",context)
 
 def profile(request):
-    return render(request,"dashboard/profile.html")
+    homeworks= Homework.objects.filter(is_finished=False,user=request.user)
+    todos = Todo.objects.filter(is_finished=False,user=request.user)
+    if len(homeworks) == 0:
+        homework_done = True
+    else:
+        homework_done =False
+    if len(todos) == 0:
+        todos_done = True
+    else:
+        todos_done = False
+    context = {
+        'homeworks': homeworks,
+        'todos': todos,
+        'homework_done': homework_done,
+        'todos_done': todos_done
+
+    }
+    return render(request,"dashboard/profile.html",context)
